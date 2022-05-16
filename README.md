@@ -1,4 +1,4 @@
-#Send One to Multiple emails with an attachment by one click at once without BCC or the recipients to know you send to other people.
+# Send One to Multiple emails with an attachment by one click at once without BCC or the recipients to know you send to other people.
 
 - V0.3: one to multiple email sender with an attachment, emails will be read from a text file.
 - the dependencies in pom.xml file must exits.
