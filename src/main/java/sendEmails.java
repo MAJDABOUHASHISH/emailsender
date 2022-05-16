@@ -2,6 +2,10 @@ import java.util.Properties; //represents a persistent set of properties. The Pr
 import javax.mail.*;
 import javax.mail.internet.InternetAddress; //This class represents an Internet email address using the syntax of RFC822
 import javax.mail.internet.MimeMessage; //This class represents a MIME style email message. It implements the Message abstract class and the MimePart interface.
+import javax.mail.internet.MimeMultipart; //This Class is an implementation of the abstract Multipart class that uses MIME conventions for data.
+import javax.mail.internet.MimeBodyPart; //This class represents a MIME body part. MimeBodyPart uses the InternetHeaders class to parse and store the headers of that body part.
+import java.io.File;
+import java.io.IOException;
 
 public class sendEmails {
     public static void main(String[] args) {
@@ -49,6 +53,28 @@ public class sendEmails {
 
             // Now set the actual message
             message.setText("This is actual message"); //if u add an attachment this message will be ignored and the message will be the textPart
+
+            //add an attachment
+            Multipart multipart = new MimeMultipart();
+
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+
+            MimeBodyPart textPart = new MimeBodyPart();
+
+            try {
+
+                File f =new File("C:\\Users\\majds\\desktop\\moon.png"); //the path of the attachment file
+
+                attachmentPart.attachFile(f);
+                textPart.setText("This is text");
+                multipart.addBodyPart(textPart);
+                multipart.addBodyPart(attachmentPart);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            message.setContent(multipart);
 
             // Send message
             Transport.send(message);
